@@ -1,0 +1,94 @@
+<p-table
+  #customCommandsTable
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [paginator]="true"
+  [rows]="10"
+  [value]="subCategorias"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [globalFilterFields]="['ativo', 'nome', 'dataCriacao', 'dataEdicao']">
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" />
+      <div class="ml-auto">
+        <p-button label="Criar Subcategoria" [outlined]="true" (click)="criarSubcategoria()" class="mr-3"/>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Pesquisa Global" />
+        </span>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="min-width:5rem">
+        <div class="flex align-items-center">
+          <th>Ativo</th>
+          <p-columnFilter type="boolean" field="ativo" />
+        </div>
+      </th>
+      <th style="min-width:15rem">
+        <div class="flex align-items-center">
+          <th>Nome</th>
+          <p-columnFilter type="text" field="nome" display="menu" />
+        </div>
+      </th>
+      <th style="min-width:15rem">
+        <div class="flex align-items-center">
+          <th>Categoria</th>
+          <p-columnFilter type="text" field="nomeCategoria" display="menu" />
+        </div>
+      </th>
+      <th style="min-width:15rem">
+        <div class="flex align-items-center">
+          <th>Data Criação</th>
+          <p-columnFilter type="text" field="dataCriacao" display="menu" />
+        </div>
+      </th>
+      <th style="min-width:15rem">
+        <div class="flex align-items-center">
+          <th>Data Edição</th>
+          <p-columnFilter type="text" field="dataEdicao" display="menu" />
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-subcategoria>
+    <tr>
+      <td><p-inputSwitch [(ngModel)]="subcategoria.ativo" [readonly]="true"/></td>
+      <td><p-tag value="{{ subcategoria.nome }}" [style]="{ background: subcategoria.corFundo, color: subcategoria.corTexto }"/></td>
+      <td><p-tag value="{{ subcategoria.nomeCategoria }}"></p-tag></td>
+      <td>{{ subcategoria.dataCriacao }}</td>
+      <td>{{ subcategoria.dataEdicao }}</td>
+      <td style="text-align: center">
+        <p-button severity="secondary" icon="pi pi-cog" (click)="editarSubcategoria(subcategoria)"/>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Criar Subcategoria" [(visible)]="dialogCadastroSubcategoria" [maximizable]="true" [modal]="true" [style]="{ width: '75rem', height: '32rem' }">
+  <span class="p-text-secondary block mb-5">Cria as subcategorias para seus produtos.</span>
+  <form [formGroup]="formularioCadastroSubcategoria">  
+    <p-tabView>
+      <p-tabPanel header="Cadastro de Subcategoria">
+        <div class="grid mt-1">
+          <div class="col-4">           
+            <p-floatLabel class="w-6 mt-5">
+              <input id="nome" type="text" pInputText autocomplete="off" class="w-full" formControlName="nome"/>
+              <label for="nome">Nome da Subcategoria</label>
+            </p-floatLabel>
+            <app-campo-obrigatorio [control]="formularioCadastro.nome"></app-campo-obrigatorio>
+          </div>
+          <div class="col-6">   
+            <p-checkbox formControlName="ativo" inputId="ativo" [binary]="true"></p-checkbox>
+            <label class="pl-1" for="ativo">Ativo</label>   
+          </div> 
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button label="Cancelar" [text]="true" (click)="dialogCadastroSubcategoria = false" severity="secondary"/>
+    <p-button label="Salvar" [outlined]="true" severity="secondary" [disabled]="desabilitarBotaoSalvar" (onClick)="salvarSubcategoria()"/>
+  </ng-template>
+</p-dialog>

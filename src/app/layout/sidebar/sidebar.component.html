@@ -1,0 +1,23 @@
+<div style="height: 100%; display: flex; position: fixed; padding-bottom: 1rem;">
+  <p-menu [model]="items" styleClass="w-full md:w-15rem h-full">
+    <ng-template pTemplate="start">
+      <span class="inline-flex align-items-center gap-1 px-2 py-2">
+        <span class="font-medium text-xl font-semibold">
+          SOFT <span class="text-primary">WEEK</span>
+        </span>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="submenuheader" let-item>
+      <span class="text-primary font-bold">{{ item.label }}</span>
+    </ng-template>
+    <ng-template pTemplate="item" let-item>
+      <a pRipple class="flex align-items-center p-menuitem-link" [href]="item.url">
+        <span [class]="item.icon"></span>
+        <span class="ml-2">{{ item.label }}</span>
+        <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
+            {{ item.shortcut }}
+        </span>
+      </a>
+    </ng-template>
+  </p-menu>
+</div>
