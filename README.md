@@ -47,7 +47,7 @@ entre o produto e múltiplas subcategorias seja salvo corretamente no banco de d
 
 - 1. Crie uma branch com o seu nome completo.
 
-- 2. Preencha o seguinte formulário: https://forms.gle/3RecPQZL8HnJ7GAXA.
+- 2. Preencha o seguinte formulário: https://forms.gle/vNGQURVHcFqJfC327.
 
 - 3. Descreva claramente no commit o que foi feito. Exemplo de descrição de commit:
 "Desafios 1, 2, 3 concluídos, desafio 4 feito parcialmente. Também foi implementado novo sistema tal tal tal"
