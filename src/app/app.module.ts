@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubCategoriasComponent } from './pages/subcategorias/subcategorias.component';
 import { CampoObrigatorioComponent } from './layout/campo-obrigatorio/campo-obrigatorio.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CampoObrigatorioComponent } from './layout/campo-obrigatorio/campo-obri
     CampoObrigatorioComponent,
   ],
   imports: [
+    ToastrModule.forRoot(),
     CommonModule,
     BrowserModule,
     AppRoutingModule,

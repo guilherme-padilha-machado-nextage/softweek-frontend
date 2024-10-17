@@ -3,11 +3,12 @@ import { SubCategorias } from '../../models/subcategorias/subcategorias';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubCategoriasService } from '../../services/subcategorias/subcategorias.service';
 import { ColorUtil } from '../../utils/colorUtil';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subcategorias',
   templateUrl: './subcategorias.component.html',
-  styleUrl: './subcategorias.component.scss'
+  styleUrls: ['./subcategorias.component.scss'] 
 })
 export class SubCategoriasComponent implements OnInit {
   dialogCadastroSubcategoria: boolean = false;
@@ -16,7 +17,11 @@ export class SubCategoriasComponent implements OnInit {
   subCategorias: SubCategorias[] = [];
   cores: any[] = [];
 
-  constructor(private formBuilder: FormBuilder, private subCategoriasSvc: SubCategoriasService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private subCategoriasSvc: SubCategoriasService,
+    private toastr: ToastrService 
+  ) { }
 
   ngOnInit(): void {
     this.inicializarFormulario(new SubCategorias());
@@ -36,7 +41,6 @@ export class SubCategoriasComponent implements OnInit {
       corFundo: [subCategorias.corFundo],
       corTexto: [subCategorias.corTexto]
     });
-
   }
 
   carregarSubcategorias(){
@@ -79,12 +83,14 @@ export class SubCategoriasComponent implements OnInit {
 
   salvarNovaSubcategoria(subcategoria: SubCategorias){
     this.subCategoriasSvc.salvarSubCategoria(subcategoria).subscribe(() => {
+      this.toastr.success('Subcategoria salva com sucesso!', 'Sucesso');
       this.finalizarAcao();
     });
   }
 
   atualizarSubategoria(subcategoria: SubCategorias){
     this.subCategoriasSvc.editarSubCategoria(subcategoria).subscribe(() => {
+      this.toastr.success('Subcategoria atualizada com sucesso!', 'Sucesso');
       this.finalizarAcao();
     });
   }
